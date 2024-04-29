@@ -9,4 +9,6 @@ client.once(Events.ClientReady, readyClient => {
     console.log(`Logged in as ${readyClient.user?.tag}`);
 })
 
+
+
 client.login(process.env.DISCORD_TOKEN);
