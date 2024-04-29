@@ -7,12 +7,12 @@ module.exports = {
     async execute(interaction: CommandInteraction) {
         const before = Date.now();
         try {
-            await interaction.deferReply();
+            await interaction.reply('Pinging...');
             const after = Date.now();
             const latency = after - before;
-            await interaction.followUp(`Pong! Bot latency: ${latency}ms`);
+            await interaction.editReply(`Pong! Bot latency: ${latency}ms`);
         } catch (error) {
-            console.error('Error deferring reply:', error);
+            console.error('Error replying:', error);
         }
     },
 };

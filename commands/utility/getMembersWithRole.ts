@@ -31,18 +31,23 @@ module.exports = {
             .setDescription('The role to check')
             .setRequired(true)),
     async execute(interaction: CommandInteraction) {
+        let response = '';
         if (!interaction.guild) {
-            return interaction.reply({ content: 'This command can only be used in a guild.', ephemeral: true });
+            response = 'This command can only be used in a guild.';
+        } else {
+            const role = interaction.options.get('role', true).role; // Get the 'role' option
+            if (!role || !(role instanceof Role)) {
+                response = 'Role not found';
+            } else {
+                const membersWithRole = await getMembersWithRole(interaction.guild, role);
+                if (!membersWithRole.size) {
+                    response = `No users with the ${role.name} role found.`;
+                } else {
+                    const memberNames = membersWithRole.map(member => member.user.username).join(', ');
+                    response = `Users with the ${role.name} role: ${memberNames}`;
+                }
+            }
         }
-        const role = interaction.options.get('role', true).role; // Get the 'role' option
-        if (!role || !(role instanceof Role)) {
-            return interaction.reply({ content: 'Role not found', ephemeral: true });
-        }
-        const membersWithRole = await getMembersWithRole(interaction.guild, role);
-        if (!membersWithRole.size) {
-            return interaction.reply({ content: `No users with the ${role.name} role found.`, ephemeral: true });
-        }
-        const memberNames = membersWithRole.map(member => member.user.username).join(', ');
-        await interaction.reply(`Users with the ${role.name} role: ${memberNames}`);
+        await interaction.reply({ content: response, ephemeral: true });
     }
 };
