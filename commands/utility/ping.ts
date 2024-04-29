@@ -6,9 +6,13 @@ module.exports = {
         .setDescription('Replies with Pong!'),
     async execute(interaction: CommandInteraction) {
         const before = Date.now();
-        await interaction.deferReply();
-        const after = Date.now();
-        const latency = after - before;
-        await interaction.editReply(`Pong! Bot latency: ${latency}ms`);
+        try {
+            await interaction.deferReply();
+            const after = Date.now();
+            const latency = after - before;
+            await interaction.followUp(`Pong! Bot latency: ${latency}ms`);
+        } catch (error) {
+            console.error('Error deferring reply:', error);
+        }
     },
 };
