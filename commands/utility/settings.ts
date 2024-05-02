@@ -11,7 +11,7 @@ module.exports = {
   async execute(interaction: CommandInteraction) {
     const embed = new EmbedBuilder()
       .setTitle("Settings")
-      .setThumbnail("https://raw.githubusercontent.com/hmortimore69/Brunel-Bot/main/assets/images/gear.svg", )
+      .setThumbnail("https://raw.githubusercontent.com/hmortimore69/Brunel-Bot/main/assets/images/gear.png", )
       .setColor("#00b0f4")
       .setFooter({
         text: "Designed by Harveyyyy",
