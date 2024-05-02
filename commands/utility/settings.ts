@@ -14,7 +14,7 @@ module.exports = {
     .setColor("#00b0f4")
     .setFooter({
       text: "Example Footer",
-      iconURL: "../../assets/images/gear.svg",
+      iconURL: "https://github.com/hmortimore69/Brunel-Bot/blob/main/assets/images/gear.png",
     })
     .setTimestamp();
 
