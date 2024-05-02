@@ -14,7 +14,7 @@ module.exports = {
       .setThumbnail("https://raw.githubusercontent.com/hmortimore69/Brunel-Bot/main/assets/images/gear.png", )
       .setColor("#00b0f4")
       .setFooter({
-        text: "Designed by Harveyyyy",
+        text: "Designed by Harveyyyy :)",
       })
     .setTimestamp();
 
