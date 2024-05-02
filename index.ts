@@ -73,5 +73,5 @@ client.on(Events.InteractionCreate, async (interaction) => {
 
 client
   .login(process.env.DISCORD_TOKEN)
-  .then(() => console.log("Logged in!"))
+  .then(() => console.log(`Logged in as ${client.user?.tag}!`))
   .catch(console.error);
