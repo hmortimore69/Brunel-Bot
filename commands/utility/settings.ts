@@ -11,10 +11,10 @@ module.exports = {
   async execute(interaction: CommandInteraction) {
     const embed = new EmbedBuilder()
     .setTitle("Settings")
+        .setThumbnail("https://raw.githubusercontent.com/hmortimore69/Brunel-Bot/main/assets/images/gear.png")
     .setColor("#00b0f4")
     .setFooter({
-      text: "Example Footer",
-      iconURL: "https://github.com/hmortimore69/Brunel-Bot/blob/main/assets/images/gear.png",
+      text: "Designed by Harveyyyy",
     })
     .setTimestamp();
 
