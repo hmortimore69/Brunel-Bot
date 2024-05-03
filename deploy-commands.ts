@@ -20,7 +20,7 @@ for (const folder of commandFolders) {
         if ('data' in command) {
             commands.push(command.data.toJSON());
         } else {
-            console.log(`Error: ${file} does not have the correct structure.`);
+            console.log(`Error: ${file} does not have the correct structure. Please fix it and try again.`);
         }
     }
 }
