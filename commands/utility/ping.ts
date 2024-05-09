@@ -1,4 +1,4 @@
-import { SlashCommandBuilder, CommandInteraction } from "discord.js";
+import { SlashCommandBuilder, CommandInteraction, EmbedBuilder } from "discord.js";
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -6,19 +6,44 @@ module.exports = {
     .setDescription("Replies with Pong!"),
   async execute(interaction: CommandInteraction) {
     const websocketLatency = interaction.client.ws.ping;
-    const before = await interaction.reply({
-      content: "Pinging...",
-      fetchReply: true,
-    });
-    const roundtripLatency =
-      before.createdTimestamp - interaction.createdTimestamp;
     const latencyMessage =
       websocketLatency === -1
-        ? "WebSocket latency is still being calculated..."
+        ? "WebSocket Latency: N/A"
         : `WebSocket Latency: ${websocketLatency}ms`;
 
-    await interaction.editReply({
-      content: `Pong!  🏓\nRound-trip Latency: ${roundtripLatency}ms\n${latencyMessage}`,
-    });
+    const responseEmbed = new EmbedBuilder()
+      .setTitle("Pinging...")
+      .setColor("#0099ff")
+      .addFields({
+        name: "Round-trip Latency",
+        value: "Calculating...",
+        inline: true
+      },
+      {
+        name: "WebSocket Latency",
+        value: "Calculating...",
+        inline: true
+      })
+      .setTimestamp();
+
+    const sentEmbed = await interaction.reply({ embeds: [responseEmbed], fetchReply: true });
+
+    const roundtripLatency = sentEmbed.createdTimestamp - interaction.createdTimestamp;
+
+    const updatedEmbed = new EmbedBuilder()
+      .setTitle("Pong! 🏓")
+      .setColor("#0099ff")
+      .addFields({
+        name: "Round-trip Latency",
+        value: `${roundtripLatency}ms`,
+        inline: true
+      },
+      {
+        name: "WebSocket Latency",
+        value: latencyMessage,
+        inline: true
+      })
+      .setTimestamp();
+    await interaction.editReply({ embeds: [updatedEmbed] });
   },
 };
