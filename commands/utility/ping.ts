@@ -5,11 +5,12 @@ module.exports = {
     .setName("ping")
     .setDescription("Replies with Pong!"),
   async execute(interaction: CommandInteraction) {
-    const websocketLatency = interaction.client.ws.ping;
-    const latencyMessage =
-      websocketLatency === -1
+    const webSocketLatency = interaction.client.ws.ping;
+
+    const webSocketLatencyMessage =
+    webSocketLatency === -1
         ? "WebSocket Latency: N/A"
-        : `WebSocket Latency: ${websocketLatency}ms`;
+        : `WebSocket Latency: ${webSocketLatency}ms`;
 
     const responseEmbed = new EmbedBuilder()
       .setTitle("Pinging...")
@@ -27,7 +28,6 @@ module.exports = {
       .setTimestamp();
 
     const sentEmbed = await interaction.reply({ embeds: [responseEmbed], fetchReply: true });
-
     const roundtripLatency = sentEmbed.createdTimestamp - interaction.createdTimestamp;
 
     const updatedEmbed = new EmbedBuilder()
@@ -40,7 +40,7 @@ module.exports = {
       },
       {
         name: "WebSocket Latency",
-        value: latencyMessage,
+        value: webSocketLatencyMessage,
         inline: true
       })
       .setTimestamp();
