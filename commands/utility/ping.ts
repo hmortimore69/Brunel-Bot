@@ -34,7 +34,7 @@ module.exports = {
       .setTitle("Pong! 🏓")
       .setColor("#0099ff")
       .addFields({
-        name: "Round-trip Latency",
+        name: "Round-Trip Latency",
         value: `${roundtripLatency}ms`,
         inline: true
       },
